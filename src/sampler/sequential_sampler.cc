@@ -31,7 +31,7 @@ SequentialSampler::SequentialSampler(std::vector<int64_t> lens, std::vector<int6
         CHECK_GE(end, 0) << "Video{" << i << "} has range end smaller than 0: " << end;
         CHECK(begin < end) << "Video{" << i << "} has invalid begin and end config: " << begin << "->" << end;
         CHECK(end < lens[i]) << "Video{" << i <<"} has range end larger than # frames: " << lens[i];
-        int64_t bs_skip = bs * (1 + interval) - interval + skip;
+        int64_t bs_skip = bs * (1 + interval) + skip;
         int64_t bs_length = bs_skip - skip;
         for (int64_t b = begin; b + bs_length < end; b += bs_skip) {
             int offset = 0;
